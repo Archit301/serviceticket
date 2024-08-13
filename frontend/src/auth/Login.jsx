@@ -37,7 +37,7 @@ const Login = () => {
                 body: JSON.stringify(formData),
               });
               const data = await res.json();
-              if(data.success==false){
+              if(data.success===false){
             //    dispatch(signinFailure(data.message));
             setLoading(false);
             setError(data.message);
@@ -49,7 +49,7 @@ const Login = () => {
                if(formData.role==="admin"){
                   navigate('/request');
                }
-               else if(formData.role==="user"){
+               else if(formData.role==='user'){
                 navigate('/userhomepage');
              }
               console.log(data);
