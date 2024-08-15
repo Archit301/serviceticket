@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
     const navigate=useNavigate()
+   const {currentUser}=useSelector(state=>state.user)
     const [loading, setLoading] = useState(false);
   const [tickets, settickets] = useState([]);
   const [showMore, setShowMore] = useState(false);
+
 
   useEffect(()=>{
     const urlParams = new URLSearchParams(location.search);
@@ -28,7 +31,10 @@ const Search = () => {
 fetchTickets()
 },[location.search])
   
-
+const handleClick=(ticketId)=>{
+  console.log("hello")
+navigate(`/viewticket/${ticketId}`)
+}
 const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
@@ -82,12 +88,14 @@ const handleSubmit = (e) => {
                 <span className="text-lg font-semibold text-gray-800">${ticket.ticketPrice}</span>
                 <span className="text-sm text-gray-500 capitalize">{ticket.category}</span>
               </div>
-              <button
+            { currentUser.role==="user" &&
+            (  <button
                 className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-full transition duration-300"
                 onClick={() => handleClick(ticket._id)}
               >
                 Book Now
-              </button>
+              </button>)
+}
             </div>
           </div>
         ))

@@ -67,7 +67,7 @@ function App() {
         </Route>
         {/* </>} */}
          {/* <Route  element={<PrivateRoute/>}> */}
-         <Route  element={<PrivateRouteadmin/>}>
+          <Route  element={<PrivateRouteadmin/>}> 
         <Route path='/adminhomepage' element={<Adminhomepage/>}/>
         <Route path='/adminticket' element={<Adminticket/>}/>
         <Route path='/createticket' element={<CreateTicket/>}/>
@@ -78,7 +78,7 @@ function App() {
         <Route path='/adminticketsoldoutname' element={<AdminsoldoutName/>}/>
         <Route path='/adminticketexpiryname' element={<AdminexpiryName/>}/>
         <Route path='/adminbankdetail' element={<Adminbankdetail/>}/>
-        </Route>
+         </Route> 
         <Route  element={<PrivateRoutesuperadminandadmin/>}>
         <Route path="/purchasedetails/:ticketId" element={<TicketPurchaseUserdetail />} />
         </Route>

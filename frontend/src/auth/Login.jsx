@@ -14,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 //  const {currentUser,error}=useSelector((state)=>state.user)
- //  const dispatch=useDispatch()
+   const dispatch=useDispatch()
     const superadmin="tambiarchit@gmail.com";
     const [err,seterr]=useState("");
         const handleChange = (e) => {
@@ -45,7 +45,7 @@ const Login = () => {
               }
               setLoading(false);
               setError(null);
-              //dispatch(siginInSuccess(data));
+              dispatch(siginInSuccess(data));
                if(formData.role==="admin"){
                   navigate('/request');
                }
@@ -62,7 +62,7 @@ const Login = () => {
   return (
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">
     <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-700">Signin</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-700">SignUp</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
             {/* Username Field */}
             <div>
