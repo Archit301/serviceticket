@@ -68,7 +68,7 @@ const UserHomepage = () => {
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">{ticket.ticketName} </h3>
                 <p className="text-gray-600 mb-4">{ticket.ticketDescription}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold text-gray-800">${ticket.ticketPrice}</span>
+                  <span className="text-lg font-semibold text-gray-800">₹{ticket.ticketPrice}</span>
                   <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg cursor-pointer" onClick={() => handleClick(ticket._id)}>
                     Book Now
                   </button>

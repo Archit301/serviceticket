@@ -48,7 +48,7 @@ const TicketCard = ({ ticket, onDelete,onClick,onEdit }) => {
             <h2 className="text-xl font-semibold text-gray-800">{ticket.ticketName}</h2>
             <p className="text-gray-600 mt-2">{ticket.ticketDescription}</p>
             <div className="mt-4 flex items-center justify-between">
-                <span className="text-lg font-semibold text-gray-800">${ticket.ticketPrice}</span>
+                <span className="text-lg font-semibold text-gray-800">₹{ticket.ticketPrice}</span>
                 <span className="text-sm text-gray-600">Seats: {ticket.ticketSeatAvailable}</span>
                 <FaEye className="text-gray-600 cursor-pointer hover:text-blue-500" />
             </div>

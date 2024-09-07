@@ -108,7 +108,7 @@ const UserTicket = () => {
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">{ticket.ticketName}</h3>
                 <p className="text-gray-600 mb-4">{ticket.ticketDescription}</p>
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-semibold text-gray-800">${ticket.ticketPrice}</span>
+                  <span className="text-lg font-semibold text-gray-800">₹{ticket.ticketPrice}</span>
                   <span className="text-sm text-gray-500 capitalize">{ticket.category}</span>
                 </div>
                 <button

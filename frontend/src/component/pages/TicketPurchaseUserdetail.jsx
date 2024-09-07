@@ -100,7 +100,7 @@ const TicketPurchaseUserdetail = () => {
          <h1 className="text-2xl font-bold mb-4">{ticket.ticketName}</h1>
       <img src={ticket.coverImage} alt={ticket.ticketName} className="w-full h-48 object-cover mb-4" />
       <p className="text-gray-700">{ticket.ticketDescription}</p>
-      <p className="text-lg font-semibold mt-4">Price: ${ticket.ticketPrice}</p>
+      <p className="text-lg font-semibold mt-4">Price: ₹{ticket.ticketPrice}</p>
       <p className="text-sm mt-2">Seats Available: {ticket.ticketSeatAvailable}</p>
     <div className="max-w-6xl mx-auto bg-white shadow-md rounded-lg overflow-x-auto">
       <h1 className="  text-2xl font-semibold p-6 border-b">Purchase By</h1>

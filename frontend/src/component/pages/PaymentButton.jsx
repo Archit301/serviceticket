@@ -57,7 +57,7 @@ const PaymentButton = ({amount,ticketId,userId}) => {
                       navigate('/userticket')
                     } 
                   } catch (error) {
-                    alert('Payment verification failed.');
+                    // alert('Payment verification failed.');
                     console.error('Error verifying payment:', error);
                   }
                 },
