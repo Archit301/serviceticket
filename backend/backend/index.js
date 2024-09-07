@@ -17,9 +17,8 @@ const app=express();
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
-const mongoURI = "mongodb+srv://tambiarchit:archit123@cluster0.6oq9wtf.mongodb.net/test?retryWrites=true&w=majority"
 mongoose
-    .connect(mongoURI)
+    .connect(process.env.MONGO)
     .then(()=>{
         console.log("Database is connected")
     })
