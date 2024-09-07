@@ -26,7 +26,7 @@ const UserFeedback = () => {
   
         if (response.ok) {
            
-                toast.success('Ticket  updated successfully!', {
+                toast.success('Feedback submited successfully!', {
                   position: "top-right",
                   autoClose: 5000,
                   hideProgressBar: false,
