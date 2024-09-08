@@ -27,7 +27,7 @@ const Header = () => {
   return (
     <header className="bg-gray-800 text-white shadow-md">
       <div className="flex flex-col sm:flex-row items-center justify-between p-4">
-        <Link to={`/${currentUser?.role || 'homepage'}`} className="flex items-center mb-4 sm:mb-0">
+      <Link to={`/${currentUser?.role ? `${currentUser.role}homepage` : 'homepage'}`} className="flex items-center mb-4 sm:mb-0">
           <h1 className="font-bold text-xl sm:text-2xl flex flex-wrap">
             <span className="text-slate-500">Service</span>
             <span className="text-slate-200">Desk</span>
