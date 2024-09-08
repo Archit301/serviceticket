@@ -47,13 +47,23 @@ function App() {
   const {currentUser}=useSelector((state)=>state.user)
   const [error,seterror]=useState("");
 
+  const appStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh'
+  };
+
+  const mainContentStyles = {
+    flex: 1
+  };
+
   return (
     
     <>
       <BrowserRouter>
-      { currentUser&& 
-      <Header/>
-} 
+      <div style={appStyles}>
+        {currentUser && <Header />}
+        <div style={mainContentStyles}>
       <Routes>
       <Route path='/' element={<Login/>} />
       <Route path='/signin' element={<Signup/>}/>
@@ -101,7 +111,9 @@ function App() {
         {/* </Route> */}
         
       </Routes>
-      <Footer/>
+      </div>
+        <Footer />
+      </div>
       </BrowserRouter>
     </>
   )
