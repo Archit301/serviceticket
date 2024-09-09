@@ -35,7 +35,7 @@ const ticketSchema=new mongoose.Schema({
     category:{
       type:String,
       enum:['sports','adventure','comedy','thriller','others'],
-      //default:'sports'
+      default:'sports'
     },
     feedback:[
         {
