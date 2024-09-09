@@ -183,137 +183,154 @@ const CreateTicket = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800">Create a New Ticket</h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-medium mb-2">Ticket Name</label>
+    <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
+      <h1 className="text-3xl font-bold mb-8 text-gray-800">Create a New Ticket</h1>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        
+        <div className="mb-6">
+          <label className="block text-gray-700 text-lg font-medium mb-2">
+            Ticket Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="ticketName"
+            name="ticketName"
+            value={formData.ticketName}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+            placeholder="Enter the ticket name"
+            required
+          />
+        </div>
+  
+        <div className="mb-6">
+          <label className="block text-gray-700 text-lg font-medium mb-2">
+            Ticket Description <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            id="ticketDescription"
+            name="ticketDescription"
+            value={formData.ticketDescription}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+            rows="6"
+            placeholder="Describe the ticket in detail"
+            required
+          />
+        </div>
+  
+        <div className="mb-6">
+          <label className="block text-gray-700 text-lg font-medium mb-2">
+            Ticket Price <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            id="ticketPrice"
+            name="ticketPrice"
+            value={formData.ticketPrice}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+            placeholder="Enter the ticket price"
+            required
+          />
+        </div>
+  
+        <div className="mb-6">
+          <label className="block text-gray-700 text-lg font-medium mb-2">
+            Category <span className="text-red-500">*</span>
+          </label>
+          <select
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+            required
+          >
+            <option value="sports">Sports</option>
+            <option value="adventure">Adventure</option>
+            <option value="comedy">Comedy</option>
+            <option value="thriller">Thriller</option>
+            {/* <option value="others">Other</option> */}
+          </select>
+          {showCustomCategory && (
             <input
               type="text"
-              id="ticketName"
-              name="ticketName"
-              value={formData.ticketName}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-              placeholder="Enter the ticket name"
-              required
+              id="customCategory"
+              value={customCategory}
+              onChange={handleCustomCategoryChange}
+              className="border border-gray-300 rounded-lg py-3 px-4 w-full mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+              placeholder="Enter custom category"
             />
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-medium mb-2">Ticket Description</label>
-            <textarea
-              id="ticketDescription"
-              name="ticketDescription"
-              value={formData.ticketDescription}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-              rows="6"
-              placeholder="Describe the ticket in detail"
-              required
-            />
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-medium mb-2">Ticket Price</label>
-            <input
-              type="number"
-              id="ticketPrice"
-              name="ticketPrice"
-              value={formData.ticketPrice}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-              placeholder="Enter the ticket price"
-              required
-            />
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-medium mb-2">Category</label>
-            <select
-              id="category"
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-            >
-              <option value="sports">Sports</option>
-              <option value="adventure">Adventure</option>
-              <option value="comedy">Comedy</option>
-              <option value="thriller">Thriller</option>
-              <option value="other">Other</option>
-            </select>
-            {showCustomCategory && (
-              <input
-                type="text"
-                id="customCategory"
-                value={customCategory}
-                onChange={handleCustomCategoryChange}
-                className="border border-gray-300 rounded-lg py-3 px-4 w-full mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-                placeholder="Enter custom category"
-              />
-            )}
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-medium mb-2">Cover Image</label>
-            <input
-              type="file"
-              multiple
-              onChange={(e) => setFiles(e.target.files)}
-              className="border border-gray-300 rounded-lg py-3 px-4 w-full"
-            />
-            <button
-              type="button"
-              onClick={handleImageSubmit}
-              className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg"
-              disabled={uploading}
-            >
-              {uploading ? 'Uploading...' : 'Upload Images'}
-            </button>
-            {imageUploadError && (
-              <p className="text-red-500 mt-2">{imageUploadError}</p>
-            )}
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-medium mb-2">Seats Available</label>
-            <input
-              type="number"
-              id="ticketSeatAvailable"
-              name="ticketSeatAvailable"
-              value={formData.ticketSeatAvailable}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-              placeholder="Enter number of available seats"
-              required
-            />
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-gray-700 text-lg font-medium mb-2">Expiry Date</label>
-            <input
-              type="date"
-              id="expiryDate"
-              name="expiryDate"
-              value={formData.expiryDate}
-              onChange={handleChange}
-              className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-              required
-            />
-          </div>
-
+          )}
+        </div>
+  
+        <div className="mb-6">
+          <label className="block text-gray-700 text-lg font-medium mb-2">
+            Cover Image <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="file"
+            multiple
+            onChange={(e) => setFiles(e.target.files)}
+            className="border border-gray-300 rounded-lg py-3 px-4 w-full"
+          />
           <button
-            type="submit"
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+            type="button"
+            onClick={handleImageSubmit}
+            className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg"
+            disabled={uploading}
           >
-            Create Ticket
+            {uploading ? 'Uploading...' : 'Upload Images'}
           </button>
-        </form>
-        {error && <p className="text-red-500 mt-4">{error}</p>}
-        <ToastContainer />
-      </div>
+          {imageUploadError && (
+            <p className="text-red-500 mt-2">{imageUploadError}</p>
+          )}
+        </div>
+  
+        <div className="mb-6">
+          <label className="block text-gray-700 text-lg font-medium mb-2">
+            Seats Available <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            id="ticketSeatAvailable"
+            name="ticketSeatAvailable"
+            value={formData.ticketSeatAvailable}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+            placeholder="Enter number of available seats"
+            required
+          />
+        </div>
+  
+        <div className="mb-6">
+          <label className="block text-gray-700 text-lg font-medium mb-2">
+            Expiry Date <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="date"
+            id="expiryDate"
+            name="expiryDate"
+            value={formData.expiryDate}
+            onChange={handleChange}
+            className="border border-gray-300 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+            required
+          />
+        </div>
+  
+        <button
+          type="submit"
+          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+        >
+          Create Ticket
+        </button>
+      </form>
+      {error && <p className="text-red-500 mt-4">{error}</p>}
+      <ToastContainer />
     </div>
+  </div>
+  
   );
 };
 
