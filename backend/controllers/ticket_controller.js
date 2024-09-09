@@ -595,34 +595,46 @@ export const usermyticket=async(req,res)=>{
 
 /////////############# searching##########
 
-export const getTickets=async(req,res,next)=>
-{
+export const getTickets = async (req, res, next) => {
   try {
-    const limit = parseInt(req.query.limit) || 0;
+    const limit = parseInt(req.query.limit) || 10; // Default to 10 if no limit is provided
     const startIndex = parseInt(req.query.startIndex) || 0;
     const searchTerm = req.query.searchTerm || '';
     const sort = req.query.sort || 'createdAt';
-    const order = req.query.order === 'asc' ? 1 : -1; // Ensure order is either 1 or -1
-    const category = req.query.category; // Optional, can be undefined
+    const order = req.query.order === 'asc' ? 1 : -1;
+    const category = req.query.category;
 
+    // Build the query for ticketName with more specific regex
     const query = {
-      ticketName: { $regex: searchTerm, $options: 'i' }
+      $or: [
+        { ticketName: { $regex: `^${searchTerm}`, $options: 'i' } }, // Starts with the search term
+        { ticketName: { $regex: searchTerm, $options: 'i' } }        // Contains the search term
+      ]
     };
 
     if (category && ['sports', 'adventure', 'comedy', 'thriller'].includes(category)) {
       query.category = category;
     }
 
+    // Get total count of matching tickets
+    const totalTickets = await Ticket.countDocuments(query);
+
+    // Get tickets with pagination
     const tickets = await Ticket.find(query)
       .sort({ [sort]: order })
       .limit(limit)
       .skip(startIndex);
 
-    return res.status(200).json(tickets);
+    // Return results with total count
+    return res.status(200).json({
+      totalTickets,
+      tickets
+    });
   } catch (error) {
-    next(error); 
+    next(error);
   }
-}
+};
+
 
 
 
