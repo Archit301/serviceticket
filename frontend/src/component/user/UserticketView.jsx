@@ -92,7 +92,7 @@ const UserticketView = () => {
             <h1 className="text-3xl font-bold text-gray-900 mb-4">{ticket.ticketName}</h1>
             <p className="text-lg text-gray-700 mb-4">{ticket.ticketDescription}</p>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-              <span className="text-2xl font-bold text-gray-900">${ticket.ticketPrice}</span>
+              <span className="text-2xl font-bold text-gray-900">₹{ticket.ticketPrice}</span>
               <span className="text-lg text-gray-600 mt-2 sm:mt-0">Category: {ticket.category}</span>
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
