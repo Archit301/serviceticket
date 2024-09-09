@@ -151,68 +151,67 @@ const Adminticket = () => {
       navigate(`/edit/${ticketId}`)
     }
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
-    <div className="max-w-6xl mx-auto">
-      {/* Filter and Button Container */}
-      <div className="flex items-center justify-between mb-6">
-  {/* Select dropdown on the left */}
-  <div className="flex-shrink-0">
-    <select
-      value={filter}
-      onChange={handleFilterChange}
-      className="border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-    >
-      <option value="all">All</option>
-      <option value="available">Available</option>
-      <option value="soldout">Sold Out</option>
-      <option value="expired">Expired</option>
-    </select>
-  </div>
+    <div className="bg-gray-100 min-h-screen p-4 sm:p-6">
+  <div className="max-w-6xl mx-auto">
+    {/* Filter and Button Container */}
+    <div className="flex flex-col sm:flex-row items-center justify-between mb-6 space-y-4 sm:space-y-0">
+      {/* Select dropdown on the left */}
+      <div className="w-full sm:w-auto">
+        <select
+          value={filter}
+          onChange={handleFilterChange}
+          className="w-full sm:w-auto border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+        >
+          <option value="all">All</option>
+          <option value="available">Available</option>
+          <option value="soldout">Sold Out</option>
+          <option value="expired">Expired</option>
+        </select>
+      </div>
 
-  {/* Centered heading */}
-  <h1 className="text-2xl font-semibold text-gray-800 mx-4 flex-grow text-center">
-    {filter.toUpperCase()} TICKETS
-  </h1>
+      {/* Centered heading */}
+      <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 text-center sm:mx-4">
+        {filter.toUpperCase()} TICKETS
+      </h1>
 
-  {/* Create Ticket Button on the right */}
-  <button
-    onClick={handleCreateTicket}
-    className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-600 transition duration-300"
-  >
-    <FaPlus className="mr-2" /> Create Ticket
-  </button>
-</div>
+      {/* Create Ticket Button on the right */}
+      <button
+        onClick={handleCreateTicket}
+        className="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center justify-center sm:justify-start hover:bg-blue-600 transition duration-300"
+      >
+        <FaPlus className="mr-2" /> Create Ticket
+      </button>
+    </div>
 
-  
-
-        {/* Ticket Cards */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-         {tickets.length > 0 ? (
-                        tickets.map((ticket) => (
-                            <TicketCard
-                                key={ticket._id}
-                                ticket={ticket}
-                                onDelete={handleDelete}
-                                onEdit={() => handleEdit(ticket._id)}
-                                onClick={() => handleViewTicket(ticket._id)}
-                            />
-                        ))
-        ) : (
-          <div className="flex items-center justify-center h-64 bg-white border border-gray-300 rounded-lg shadow-md p-6 mx-4">
+    {/* Ticket Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {tickets.length > 0 ? (
+        tickets.map((ticket) => (
+          <TicketCard
+            key={ticket._id}
+            ticket={ticket}
+            onDelete={handleDelete}
+            onEdit={() => handleEdit(ticket._id)}
+            onClick={() => handleViewTicket(ticket._id)}
+          />
+        ))
+      ) : (
+        <div className="flex items-center justify-center h-64 bg-white border border-gray-300 rounded-lg shadow-md p-6 mx-4">
           <div className="text-center">
             <p className="text-2xl font-semibold text-gray-700 mb-2">
-              No {filter} tickets  available
+              No {filter} tickets available
             </p>
             <p className="text-gray-500">
               It looks like there are no tickets matching your filter criteria at the moment.
             </p>
           </div>
         </div>
-        )}
-      </div>
+      )}
     </div>
-    <ToastContainer />
   </div>
+  <ToastContainer />
+</div>
+
   )
 }
 

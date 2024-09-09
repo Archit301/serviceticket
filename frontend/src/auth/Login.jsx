@@ -40,7 +40,14 @@ const Login = () => {
               if(data.success===false){
             //    dispatch(signinFailure(data.message));
             setLoading(false);
-            setError(data.message);
+            // Check for specific error messages and handle them
+            if (data.message.includes("Cast to ObjectId failed")) {
+              setError("Invalid email format. Please try again.");
+            } else if (data.message.includes("E11000 duplicate key error")) {
+              setError("This email is already in use. Please try another email.");
+            } else {
+              setError(data.message);
+            }
             return;
               }
               setLoading(false);

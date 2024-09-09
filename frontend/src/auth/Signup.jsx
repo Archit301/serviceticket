@@ -10,6 +10,7 @@ const Signup = () => {
     });
     const navigate=useNavigate()
     const {currentUser,error}=useSelector((state)=>state.user)
+    const [err,seterr]=useState(null);
     const dispatch = useDispatch();
     const [clickedOnce, setClickedOnce] = useState(false);
     const handleChange = (e) => {
@@ -18,49 +19,55 @@ const Signup = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         setClickedOnce(true);
-        // Handle form submission logic here
         try {
+            dispatch(siginInStart());
+            const res = await fetch('/backend/user/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
             
-        
-        dispatch(siginInStart());
-        const res = await fetch('/backend/user/signin', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-          const data = await res.json();
-         if(data.success===false){
-      dispatch(signinFailure(data.message));
-          }
-          dispatch(siginInSuccess(data));
-          console.log(data);
-          console.log(currentUser)
-          if(currentUser.role==="admin"){
-            console.log("hello")
-          if(currentUser.requestStatus==='pending'){
-            console.log("hello");
-            navigate('/request');
-        }
-
-        if(currentUser.requestStatus==='approved'){
-            console.log("hello");
-            navigate('/adminhomepage');
-        }
-    }
-    else if(currentUser.role==="superadmin"){
-        navigate('/superadminhomepage')
-    }
-    else if(currentUser.role==="user"){
-        navigate('/userhomepage')
-    }
-        } catch (error) {
-            if(signinFailure(error.message)!=="Cannot read properties of null (reading 'role')")
+            const data = await res.json();
+            
+            // Check for "Wrong credentials!" error
+            if (data.success === false) {
+                if (data.message === "Wrong credentials!") {
+                    seterr("Wrong credentials! Please check your username or password.");
+                } else {
+                    seterr(data.message);
+                }
+                dispatch(signinFailure(data.message));
                 return;
+            }
+    
+            // Success case
+            dispatch(siginInSuccess(data));
+            console.log(data);
+            console.log(currentUser);
+    
+            // Handle navigation based on role
+            if (currentUser.role === "admin") {
+                if (currentUser.requestStatus === 'pending') {
+                    navigate('/request');
+                }
+                if (currentUser.requestStatus === 'approved') {
+                    navigate('/adminhomepage');
+                }
+            } else if (currentUser.role === "superadmin") {
+                navigate('/superadminhomepage');
+            } else if (currentUser.role === "user") {
+                navigate('/userhomepage');
+            }
+        } catch (error) {
+            if (signinFailure(error.message) !== "Cannot read properties of null (reading 'role')") {
+                return;
+            }
             dispatch(signinFailure(error.message));  
         }
     };
+    
   return (
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">
     <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
@@ -115,6 +122,7 @@ const Signup = () => {
                     </p>
                 )}
       {error && <p className='text-red-500 mt-5'>{error}</p>}
+      {/* {err && <p className='text-red-500 mt-5'>{err}</p>} */}
     </div>
    
    

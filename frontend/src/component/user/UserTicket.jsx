@@ -64,18 +64,18 @@ const UserTicket = () => {
     }
   
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
+    <div className="bg-gray-100 min-h-screen p-4 sm:p-6">
     <div className="max-w-6xl mx-auto">
       {/* Filter and Button Container */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row items-center justify-between mb-6 space-y-4 sm:space-y-0">
         {/* Select dropdown on the left */}
-        <div className="flex-shrink-0">
+        <div className="w-full sm:w-auto flex-shrink-0">
           <label htmlFor="category" className="text-gray-700 font-medium mr-2">Category</label>
           <select
             id="category"
             value={filter}
             onChange={handleFilterChange}
-            className="border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 text-gray-900"
+            className="w-full sm:w-auto border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 text-gray-900"
           >
             <option value="all">All</option>
             <option value="sports">Sports</option>
@@ -86,19 +86,19 @@ const UserTicket = () => {
         </div>
   
         {/* Centered heading */}
-        <h1 className="text-2xl font-semibold text-gray-800 mx-4 flex-grow text-center">
+        <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 text-center sm:mx-4 flex-grow">
           {filter.toUpperCase()} TICKETS
         </h1>
-  
-        {/* Create Ticket Button on the right */}
-       
       </div>
   
       {/* Ticket Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
         {tickets.length > 0 ? (
           tickets.map(ticket => (
-            <div key={ticket._id} className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+            <div
+              key={ticket._id}
+              className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+            >
               <img
                 src={ticket.coverImage}
                 alt={ticket.ticketName}
@@ -136,6 +136,7 @@ const UserTicket = () => {
     </div>
     <ToastContainer />
   </div>
+  
   
   
   )
