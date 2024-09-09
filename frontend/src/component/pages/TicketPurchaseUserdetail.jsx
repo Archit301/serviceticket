@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import Slider from 'react-slick';
 
 const TicketPurchaseUserdetail = () => {
   const { ticketId } = useParams(); // Get ticketId from URL
@@ -82,10 +83,31 @@ const TicketPurchaseUserdetail = () => {
     }
   };
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true, // Ensures the height of the slider adjusts based on the image
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen p-6">
       <h1 className="text-2xl font-bold mb-4">{ticket.ticketName}</h1>
-      <img src={ticket.coverImage} alt={ticket.ticketName} className="w-full h-48 object-cover mb-4" />
+      {ticket.coverImage && Array.isArray(ticket.coverImage) && (
+        <Slider {...settings} className="w-full mb-4">
+          {ticket.coverImage.map((image, index) => (
+            <div key={index} className="w-full flex items-center justify-center">
+              <img
+                src={image}
+                alt={`Slide ${index + 1}`}
+                className="w-full object-cover h-64 sm:h-80 lg:h-96"
+              />
+            </div>
+          ))}
+        </Slider>
+      )}
       <p className="text-gray-700">{ticket.ticketDescription}</p>
       <p className="text-lg font-semibold mt-4">Price: ₹{ticket.ticketPrice}</p>
       <p className="text-sm mt-2">Seats Available: {ticket.ticketSeatAvailable}</p>
