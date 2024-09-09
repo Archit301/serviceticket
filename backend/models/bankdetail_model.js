@@ -4,7 +4,7 @@ const bankDetailSchema=new mongoose.Schema({
     adminId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Admin'
+        ref: 'User'
       },
       bankName: {
         type: String,
